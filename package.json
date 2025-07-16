@@ -1,0 +1,17 @@
+{
+  "name": "@jsr/xlsft__nuxt",
+  "version": "1.1.33",
+  "homepage": "https://jsr.io/@xlsft/nuxt",
+  "type": "module",
+  "dependencies": {
+    "fuse.js": "^7.0.0",
+    "vue": "latest"
+  },
+  "exports": {
+    ".": {
+      "types": "./_dist/index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "_jsr_revision": 11
+}
