@@ -19,7 +19,6 @@ import { clone } from './utils/clone.ts'
 import { between } from './utils/between.ts'
 import { regexp } from './utils/regexp.ts'
 import { empty } from './utils/empty.ts'
-import { filter } from './utils/filter.ts'
 import { prototype } from './utils/prototype.ts'
 import { easing } from './utils/easing.ts'
 
@@ -41,5 +40,5 @@ export {
     useAbortableInterval,
     useAbortableTimeout,
 
-    clone, between, regexp, empty, filter, prototype, easing
+    clone, between, regexp, empty, prototype, easing
 }
