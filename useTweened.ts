@@ -1,5 +1,5 @@
 import { Ref, ref, watch } from "vue"
-import { easing as e } from "./utils/easing.js";
+import { easing as e } from "./utils/easing.ts";
 
 type TweenedOptions = {
     delay?: number,
