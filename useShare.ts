@@ -27,4 +27,4 @@ type ShareData = {
 export const useShare = async (data: ShareData): Promise<void> => { try {
     if (navigator.canShare(data)) await navigator.share(data)
     else useClipboard(`${data.url}`)
-} catch (error) { useClipboard(`${data.url}`) }}
+} catch (_) { useClipboard(`${data.url}`) }}

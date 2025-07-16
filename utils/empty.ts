@@ -10,7 +10,7 @@
  * 
  * @return boolean
  */
-export const empty = (o: Record<any,any>): boolean => {
+export const empty = (o: Record<PropertyKey,unknown>): boolean => {
     for (const prop in o) { if (Object.hasOwn(o, prop)) return false }
     return true
 }

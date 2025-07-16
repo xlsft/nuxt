@@ -17,8 +17,8 @@
  * @return {string} The appropriate form of the word based on the input number.
  */
 export const useCase = (number: number, one: string, some: string, many: string, text?: boolean, zero?: string): string => {
-    let n = Math.abs(number) % 100;
-    let n1 = n % 10;
+    const n = Math.abs(number) % 100;
+    const n1 = n % 10;
     if (n ===0 && text) return zero || ''
     if (n > 10 && n < 20) return text ? many : `${number} ${many}`
     if (n1 > 1 && n1 < 5) return text ? some : `${number} ${some}`

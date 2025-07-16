@@ -46,8 +46,8 @@ export const useTweened = (initial: number, o?: TweenedOptions): Tweened => {
     let frame: number | null = null, 
         time: number | null = null, 
         start: number = initial, 
-        end: number = initial,
-        options: Required<TweenedOptions> = {
+        end: number = initial
+    const options: Required<TweenedOptions> = {
             delay: 0,
             duration: 400,
             easing: e.linear

@@ -1,3 +1,5 @@
+import { ComputedRef, Ref } from "vue";
+
 /**
  * ## utils/clone
  * @param proxy Proxy, like `reactive()` or `ref()`
@@ -12,4 +14,4 @@
  * 
  * @return Clone of proxy without proxy
  */
-export const clone = <T = any>(proxy: any): T => JSON.parse(JSON.stringify(proxy))
+export const clone = <T = unknown>(proxy: Ref | ComputedRef): T => JSON.parse(JSON.stringify(proxy))

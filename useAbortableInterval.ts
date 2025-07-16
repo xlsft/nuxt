@@ -17,7 +17,7 @@ import { Ref, ref } from "vue";
  * @return {Ref<number>} A ref containing the interval ID
  */
 export const useAbortableInterval = (callback: () => void, timing?: number, signal?: AbortSignal): Ref<number> => {
-    if (signal.aborted) throw new Error('Signal already aborted')
+    if (!signal || signal.aborted) throw new Error('Signal already aborted')
     const interval = ref(setInterval(() => {
         callback();
         if (signal.aborted) clearInterval(interval.value)

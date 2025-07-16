@@ -18,7 +18,7 @@ import { Ref, ref } from "vue";
  * @return {Ref<number>} A ref containing the timeout ID
  */
 export const useAbortableTimeout = (callback: () => void, delay?: number, signal?: AbortSignal): Ref<number> => {
-    if (signal.aborted) throw new Error('Signal already aborted')
+    if (!signal || signal.aborted) throw new Error('Signal already aborted')
     const timeout = ref(setTimeout(() => {
         callback();
         if (signal.aborted) clearTimeout(timeout.value)

@@ -154,9 +154,10 @@ class Dragger {
         },
         wheel: (event: WheelEvent) => {
             event.preventDefault();
-            if (this.options.direction === 'y') this.container!.scrollTop += event.deltaY * 5;
-            else if (this.options.direction === 'x') this.container!.scrollLeft += event.deltaY * 5;
-            else if (this.options.direction === 'both') event.shiftKey ? this.container!.scrollLeft += event.deltaY * 5 : this.container!.scrollTop += event.deltaY * 5;
+            const { deltaX, deltaY, shiftKey } = event;
+            if (this.options.direction === 'x') this.container!.scrollLeft += deltaX || (shiftKey ? deltaY : 0) * 5;
+            else if (this.options.direction === 'y') this.container!.scrollTop += deltaY * 5;
+            else if (this.options.direction === 'both') { this.container!.scrollLeft += deltaX; this.container!.scrollTop += deltaY }
             this.scrolled(this.container!);
         },
         track: (event: MouseEvent) => {
@@ -182,7 +183,7 @@ class Dragger {
     }
 
     public tractor = {
-        enable: (): void => { this.interval = window.setInterval(this.scroll, this.options.tractor!.interval) },
+        enable: (): void => { this.interval = setInterval(this.scroll, this.options.tractor!.interval) },
         disable: (): void => { if (this.interval) { clearInterval(this.interval); this.interval = null } }    
     }
 

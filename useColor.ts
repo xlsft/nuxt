@@ -70,18 +70,18 @@ export const useColor = (): {
                 rgb: (hex: string) => { try {
                     hex = `#${hex.replace('#', '')}`
                     const short = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-                    hex = hex.replace(short, (m, r, g, b) => r + r + g + g + b + b)
+                    hex = hex.replace(short, (_m, r, g, b) => r + r + g + g + b + b)
                     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
                     return result ? {
                         r: parseInt(result[1], 16),
                         g: parseInt(result[2], 16),
                         b: parseInt(result[3], 16)
                     } : { r: 0, g: 0, b: 0 }
-                } catch (e) { return { r: 0, g: 0, b: 0 } } },
+                } catch (_e) { return { r: 0, g: 0, b: 0 } } },
                 hsl: (hex: string) => color.convert.rgb.hsl(color.convert.hex.rgb(hex)),
             },
             rgb: {
-                hex: ({ r, g, b }: { r: number, g: number, b: number }) => { try { return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1) } catch (e) { return '#000000' } },
+                hex: ({ r, g, b }: { r: number, g: number, b: number }) => { try { return "#" + (1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1) } catch (_e) { return '#000000' } },
                 hsl: ({ r, g, b }: { r: number, g: number, b: number }) => { try {
                     r /= 255; g /= 255; b /= 255;
                     const l = Math.max(r, g, b);
@@ -92,7 +92,7 @@ export const useColor = (): {
                         s: 100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0), 
                         l: (100 * (2 * l - s)) / 2 
                     }
-                } catch (e) { return { h: 0, s: 0, l: 0 } } },
+                } catch (_e) { return { h: 0, s: 0, l: 0 } } },
             },
             hsl: {
                 rgb: ({ h, s, l }: { h: number, s: number, l: number }) => { try {
@@ -112,7 +112,7 @@ export const useColor = (): {
                     g = Math.round((g + m) * 255);
                     b = Math.round((b + m) * 255);
                     return { r, g, b };
-                } catch (e) { return { r: 0, g: 0, b: 0 } }},
+                } catch (_e) { return { r: 0, g: 0, b: 0 } }},
                 hex: ({ h, s, l }: { h: number, s: number, l: number }) => color.convert.rgb.hex(color.convert.hsl.rgb({ h, s, l }))
             },
         },
@@ -121,11 +121,11 @@ export const useColor = (): {
                 const { r, g, b } = color.convert.hex.rgb(hex)
                 const calc = (value: number): number => value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4)
                 return 0.2126 * calc(r) + 0.7152 * calc(g) + 0.0722 * calc(b)
-            } catch (e) { return 0 }},
+            } catch (_e) { return 0 }},
             contrast: (f: string, b: string): number => { try {
                 const [ lf, lb ] = [color.param.luminance(f), color.param.luminance(b)]
                 return (Math.max(lf, lb) - 0.2) / (Math.min(lf, lb) + 0.1)
-            } catch (e) { return 0 }}
+            } catch (_e) { return 0 }}
         },
         modify: {
             hue: {
@@ -137,7 +137,7 @@ export const useColor = (): {
                     return color.convert.hsl.hex({ h, s, l })
                 },
                 set: (hex: string, set: number): string => {
-                    let { h, s, l } = color.convert.hex.hsl(hex)
+                    const { s, l } = color.convert.hex.hsl(hex)
                     return color.convert.hsl.hex({ h: Math.max(Math.min(set, 360), 0), s, l })
                 },
             },
@@ -150,7 +150,7 @@ export const useColor = (): {
                     return color.convert.hsl.hex({ h, s, l })
                 },
                 set: (hex: string, set: number): string => {
-                    let { h, s, l } = color.convert.hex.hsl(hex)
+                    const { h, l } = color.convert.hex.hsl(hex)
                     return color.convert.hsl.hex({ h, s: Math.max(Math.min(set, 100), 0), l })
                 },
             },
@@ -163,7 +163,7 @@ export const useColor = (): {
                     return color.convert.hsl.hex({ h, s, l })
                 },
                 set: (hex: string, set: number): string => {
-                    let { h, s, l } = color.convert.hex.hsl(hex)
+                    const { h, s } = color.convert.hex.hsl(hex)
                     return color.convert.hsl.hex({ h, s, l: Math.max(Math.min(set, 100), 0) })
                 },
             }
