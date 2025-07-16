@@ -1,5 +1,5 @@
 {
     "name": "@xlsft/nuxt",
     "version": "1.1.34",
-    "exports": "./index.ts"
+    "exports": "./index"
 }

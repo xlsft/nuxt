@@ -1,4 +1,4 @@
-import { useColor } from "./useColor.js"
+import { useColor } from "./useColor"
 
 /**
  * ## useBadge

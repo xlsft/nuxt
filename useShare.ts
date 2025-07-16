@@ -1,4 +1,4 @@
-import { useClipboard } from "./useClipboard.js"
+import { useClipboard } from "./useClipboard"
 
 type ShareData = {
     title: string
